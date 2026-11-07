@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #228B22;
+  --color-forest-dark: #1a6b1a;
+  --color-emerald: #50C878;
+  --color-emerald-light: #7DDFAA;
+  --color-emerald-dark: #2E8B57;
+  --color-dark-bg: #0f1a0f;
+  --color-dark-card: #1a2e1a;
+  --color-dark-surface: #0d150d;
+  --color-glass: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(80, 200, 120, 0.2);
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-bg text-gray-100 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-emerald/30 text-white;
+  }
+}
+
+@keyframes pulse-marker {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@utility animate-pulse-marker {
+  animation: pulse-marker 2s ease-in-out infinite;
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+@utility glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+}
+
+@utility glass-strong {
+  background: rgba(15, 26, 15, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-glass-border);
+}
