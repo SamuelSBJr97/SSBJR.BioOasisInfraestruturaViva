@@ -1,6 +1,8 @@
-# Rede Oásis — Infraestrutura Biológica Descentralizada
+# Rede Oásis — Infraestrutura Biológica Descentralizada (Projeto em Desenvolvimento)
 
-Aplicação frontend moderna desenvolvida em **Angular (versão mais recente)** com arquitetura modular baseada em **Standalone Components**, **Signals** para reatividade de estado local/global, nova sintaxe de **Control Flow (`@if`, `@for`)** e pipeline de estilos com **Tailwind CSS**.
+> **Nota de Transparência:** Este projeto encontra-se em **fase de desenvolvimento, modelagem conceitual e estruturação de pilotos**. Todos os dados operacionais partem de um baseline zerado (`0 polos ativos`, `0 espécies em campo`, `0 viveiros conectados`), e os números e locais indicados representam **metas geográficas de expansão** do plano de negócios.
+
+Aplicação frontend moderna desenvolvida em **Angular (versão mais recente)** com arquitetura modular baseada em **Standalone Components**, **Signals** para reatividade de estado local/global, internacionalização completa (**`pt-BR`**, **`en-US`**, **`es-ES`**), nova sintaxe de **Control Flow (`@if`, `@for`)** e pipeline de estilos com **Tailwind CSS**.
 
 ---
 

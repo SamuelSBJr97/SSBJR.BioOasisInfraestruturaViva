@@ -1,116 +1,119 @@
 import { Injectable, signal, computed } from '@angular/core';
-import {
-  RegionalPole,
-  TraceableAsset,
-  RoiSimulationResult,
-} from '../models/oasis.models';
+import { RegionalPole, TraceableAsset } from '../models/oasis.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OasisNetworkService {
-  // Polos regionais
+  // Estado real do projeto: fase de estruturação e piloto (baseline zerado com metas projetadas)
+  readonly isDevelopmentPhase = signal<boolean>(true);
+  readonly currentActivePoles = signal<number>(0);
+  readonly targetTotalPoles = signal<number>(5);
+  readonly currentCatalogedSpecies = signal<number>(0);
+  readonly targetTotalSpecies = signal<number>(150);
+  readonly currentNurseries = signal<number>(0);
+  readonly targetTotalNurseries = signal<number>(50);
+
+  // Polos regionais projetados (objetivos de alcance geográfico no plano de desenvolvimento)
   readonly poles = signal<RegionalPole[]>([
     {
       id: 'pole-norte',
-      name: 'Polo Norte',
-      location: 'Manaus / Região Amazônica',
-      status: 'operacional',
-      speciesCount: 64,
-      nurseryPartners: 18,
+      name: 'Polo Norte (Meta)',
+      targetRegion: 'Meta Geográfica: Região Amazônica (Em Mapeamento)',
+      status: 'meta_expansao',
+      currentSpeciesCount: 0,
+      targetSpeciesCount: 60,
+      currentNurseryPartners: 0,
+      targetNurseryPartners: 15,
       latitude: -3.119,
       longitude: -60.021,
-      primaryBiomes: ['Amazônia'],
+      targetBiomes: ['Amazônia'],
     },
     {
       id: 'pole-nordeste',
-      name: 'Polo Nordeste',
-      location: 'Recife / Mata Atlântica & Caatinga',
-      status: 'operacional',
-      speciesCount: 48,
-      nurseryPartners: 24,
+      name: 'Polo Nordeste (Meta)',
+      targetRegion: 'Meta Geográfica: Caatinga & Faixa Litorânea (Em Articulação)',
+      status: 'meta_expansao',
+      currentSpeciesCount: 0,
+      targetSpeciesCount: 45,
+      currentNurseryPartners: 0,
+      targetNurseryPartners: 12,
       latitude: -8.047,
       longitude: -34.877,
-      primaryBiomes: ['Caatinga', 'Mata Atlântica'],
+      targetBiomes: ['Caatinga', 'Mata Atlântica'],
     },
     {
       id: 'pole-centro-oeste',
-      name: 'Polo Centro-Oeste',
-      location: 'Brasília / Cerrado Central',
-      status: 'operacional',
-      speciesCount: 52,
-      nurseryPartners: 14,
+      name: 'Polo Centro-Oeste (Meta)',
+      targetRegion: 'Meta Geográfica: Cerrado Central (Em Prospecção)',
+      status: 'meta_expansao',
+      currentSpeciesCount: 0,
+      targetSpeciesCount: 50,
+      currentNurseryPartners: 0,
+      targetNurseryPartners: 10,
       latitude: -15.797,
       longitude: -47.864,
-      primaryBiomes: ['Cerrado', 'Pantanal'],
+      targetBiomes: ['Cerrado', 'Pantanal'],
     },
     {
       id: 'pole-sudeste',
-      name: 'Polo Sudeste',
-      location: 'Vale do Paraíba / Serra do Mar',
-      status: 'operacional',
-      speciesCount: 72,
-      nurseryPartners: 32,
+      name: 'Polo Sudeste (Polo Piloto)',
+      targetRegion: 'Polo Piloto Inicial: Serra do Mar / Vale (Fase de Validação Técnica)',
+      status: 'polo_piloto',
+      currentSpeciesCount: 0,
+      targetSpeciesCount: 70,
+      currentNurseryPartners: 0,
+      targetNurseryPartners: 20,
       latitude: -23.55,
       longitude: -46.633,
-      primaryBiomes: ['Mata Atlântica'],
+      targetBiomes: ['Mata Atlântica'],
     },
     {
       id: 'pole-sul',
-      name: 'Polo Sul',
-      location: 'Curitiba / Mata de Araucárias',
-      status: 'operacional',
-      speciesCount: 38,
-      nurseryPartners: 16,
+      name: 'Polo Sul (Meta)',
+      targetRegion: 'Meta Geográfica: Bacias Hidrográficas do Sul (Em Planejamento)',
+      status: 'meta_expansao',
+      currentSpeciesCount: 0,
+      targetSpeciesCount: 35,
+      currentNurseryPartners: 0,
+      targetNurseryPartners: 8,
       latitude: -25.428,
       longitude: -49.273,
-      primaryBiomes: ['Pampa', 'Mata Atlântica'],
+      targetBiomes: ['Pampa', 'Mata Atlântica'],
     },
   ]);
 
-  // Catálogo de Ativos Rastreados para Simulação Interativa
+  // Protótipos Conceituais para Demonstração de Rastreabilidade (Mockups)
   readonly traceableAssetsCatalog = signal<TraceableAsset[]>([
     {
-      rfidTag: 'NFC-RO-8849-BIO',
-      qrCodeId: 'QR-RO-BR-2024-0847',
-      speciesScientificName: 'Vetiveria zizanioides / Schizolobium parahyba',
-      speciesCommonName: 'Capim Vetiver & Guapuruvú Geotécnico',
-      applicationType: 'Contenção de Encostas & Taludes',
-      batchNumber: 'RO-SE-2024-0847',
-      poleOrigin: 'Polo Sudeste #07 (Viveiro Vale Vivo)',
-      healthIndex: 98.4,
-      rootTensileStrengthMPa: 75.2,
-      soilMoisturePercentage: 42.1,
-      co2AbsorptionAnnualKg: 380,
-      verifiedAt: '2026-11-07T00:15:00Z',
+      isPrototype: true,
+      rfidTag: 'PROTOTIPO-RFID-001',
+      qrCodeId: 'DEMO-RO-GEO-VETIVER',
+      speciesScientificName: 'Vetiveria zizanioides (Espécie em Estudo Piloto)',
+      speciesCommonName: 'Capim Vetiver (Módulo Geotécnico de Demonstração)',
+      applicationType: 'Contenção de Encostas & Taludes (Arquitetura Projetada)',
+      batchNumber: 'LOTE-CONCEITO-01',
+      poleOrigin: 'Ambiente de Testes / Projeção Polo Piloto Sudeste',
+      healthIndex: 0,
+      rootTensileStrengthMPa: 0,
+      soilMoisturePercentage: 0,
+      co2AbsorptionAnnualKg: 0,
+      verifiedAt: 'Fase de Validação Laboratorial e de Campo',
     },
     {
-      rfidTag: 'NFC-RO-9120-WET',
-      qrCodeId: 'QR-RO-BR-2024-1290',
-      speciesScientificName: 'Typha domingensis / Eichhornia crassipes',
-      speciesCommonName: 'Taboa Filtrante & Macrófita Depuradora',
-      applicationType: 'Depuração Hídrica & Wetlands',
-      batchNumber: 'RO-NE-2024-1290',
-      poleOrigin: 'Polo Nordeste #14 (BioViveiro Capibaribe)',
-      healthIndex: 96.1,
-      rootTensileStrengthMPa: 48.6,
-      soilMoisturePercentage: 88.5,
-      co2AbsorptionAnnualKg: 520,
-      verifiedAt: '2026-11-07T00:32:00Z',
-    },
-    {
-      rfidTag: 'NFC-RO-7431-REM',
-      qrCodeId: 'QR-RO-BR-2024-3401',
-      speciesScientificName: 'Helianthus annuus / Crotalaria juncea',
-      speciesCommonName: 'Girassol Fitorremediador & Adubo Verde',
-      applicationType: 'Fitorremediação de Solos & Mineração',
-      batchNumber: 'RO-CO-2024-3401',
-      poleOrigin: 'Polo Centro-Oeste #03 (Cerrado Germoplasma)',
-      healthIndex: 99.2,
-      rootTensileStrengthMPa: 62.0,
-      soilMoisturePercentage: 35.8,
-      co2AbsorptionAnnualKg: 440,
-      verifiedAt: '2026-11-07T00:41:00Z',
+      isPrototype: true,
+      rfidTag: 'PROTOTIPO-RFID-002',
+      qrCodeId: 'DEMO-RO-WET-TYPHA',
+      speciesScientificName: 'Typha domingensis (Espécie em Estudo Piloto)',
+      speciesCommonName: 'Taboa Filtrante (Módulo Wetland de Demonstração)',
+      applicationType: 'Depuração Hídrica & Filtros Naturais (Arquitetura Projetada)',
+      batchNumber: 'LOTE-CONCEITO-02',
+      poleOrigin: 'Ambiente de Testes / Projeção Polo Nordeste',
+      healthIndex: 0,
+      rootTensileStrengthMPa: 0,
+      soilMoisturePercentage: 0,
+      co2AbsorptionAnnualKg: 0,
+      verifiedAt: 'Fase de Modelagem de Filtros Hídricos',
     },
   ]);
 
@@ -123,44 +126,5 @@ export class OasisNetworkService {
 
   cycleNextAsset(): void {
     this.activeAssetIndex.update((idx) => (idx + 1) % this.traceableAssetsCatalog().length);
-  }
-
-  // Métricas Computadas Globais
-  readonly totalPoles = computed(() => this.poles().length);
-  readonly totalNurseries = computed(() =>
-    this.poles().reduce((acc, pole) => acc + pole.nurseryPartners, 0)
-  );
-  readonly totalCatalogedSpecies = computed(() =>
-    this.poles().reduce((acc, pole) => acc + pole.speciesCount, 0)
-  );
-
-  // Simulação de ROI com Signals para Contratos SaaS de Bioengenharia
-  calculateRoi(
-    extensionMeters: number,
-    moduleType: 'contencao' | 'depuracao' | 'remediacao'
-  ): RoiSimulationResult {
-    // Parâmetros de engenharia comparativa
-    const multipliers = {
-      contencao: { concretePerMeter: 4800, oasisPerMeter: 1650, co2Factor: 0.12, nurseryRate: 0.005 },
-      depuracao: { concretePerMeter: 5400, oasisPerMeter: 1950, co2Factor: 0.15, nurseryRate: 0.006 },
-      remediacao: { concretePerMeter: 6200, oasisPerMeter: 2200, co2Factor: 0.18, nurseryRate: 0.007 },
-    };
-
-    const cfg = multipliers[moduleType];
-    const estimatedCostTraditionalConcrete = extensionMeters * cfg.concretePerMeter;
-    const estimatedCostOasis = extensionMeters * cfg.oasisPerMeter;
-    const financialSavings = estimatedCostTraditionalConcrete - estimatedCostOasis;
-    const savingsPercentage = Math.round((financialSavings / estimatedCostTraditionalConcrete) * 100);
-    const co2OffsetTonsAnnual = Math.round(extensionMeters * cfg.co2Factor);
-    const nurseriesSupported = Math.max(1, Math.round(extensionMeters * cfg.nurseryRate));
-
-    return {
-      estimatedCostOasis,
-      estimatedCostTraditionalConcrete,
-      financialSavings,
-      savingsPercentage,
-      co2OffsetTonsAnnual,
-      nurseriesSupported,
-    };
   }
 }

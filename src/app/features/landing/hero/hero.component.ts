@@ -20,9 +20,10 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <!-- Left: Text Content -->
           <div class="space-y-8 z-10">
-            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald/10 border border-emerald/20 shadow-sm shadow-emerald/5 backdrop-blur-md">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald animate-pulse"></span>
-              <span class="text-xs font-semibold text-emerald tracking-wider uppercase">
+            <!-- Development Phase Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-sm backdrop-blur-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+              <span class="text-xs font-bold text-amber-300 tracking-wider uppercase">
                 {{ i18n.t().hero.badge }}
               </span>
             </div>
@@ -41,6 +42,14 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
               {{ i18n.t().hero.subtitle }}
             </p>
 
+            <!-- Transparency Disclaimer Banner -->
+            <div class="p-4 rounded-2xl bg-white/[0.03] border border-emerald/20 text-xs text-gray-300 leading-relaxed flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{{ i18n.t().hero.disclaimer }}</span>
+            </div>
+
             <div class="flex flex-col sm:flex-row gap-4 pt-2">
               <app-cta-button
                 [label]="i18n.t().hero.ctaPrimary"
@@ -55,40 +64,67 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
               />
             </div>
 
-            <!-- Stats with real Signals values -->
-            <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-              <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
-                  {{ oasisService.totalPoles() }}
-                </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
-                  {{ i18n.t().hero.stats.poles }}
-                </p>
-              </div>
-              <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
-                  {{ oasisService.totalCatalogedSpecies() }}+
-                </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
-                  {{ i18n.t().hero.stats.species }}
+            <!-- Stats (Zero baseline with clear Target / Roadmap Goals) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-white/10">
+              <!-- Stat 1: Polos -->
+              <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
+                <div class="flex items-baseline gap-2">
+                  <p class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    {{ oasisService.currentActivePoles() }}
+                  </p>
+                  <span class="text-xs font-bold text-emerald uppercase tracking-wider">
+                    {{ i18n.t().hero.stats.polesMeta }}
+                  </span>
+                </div>
+                <p class="text-[11px] font-medium text-gray-400 mt-1">
+                  {{ i18n.t().hero.stats.polesDesc }}
                 </p>
               </div>
-              <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
-                  {{ oasisService.totalNurseries() }}
+
+              <!-- Stat 2: Espécies -->
+              <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
+                <div class="flex items-baseline gap-2">
+                  <p class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    {{ oasisService.currentCatalogedSpecies() }}
+                  </p>
+                  <span class="text-xs font-bold text-emerald uppercase tracking-wider">
+                    {{ i18n.t().hero.stats.speciesMeta }}
+                  </span>
+                </div>
+                <p class="text-[11px] font-medium text-gray-400 mt-1">
+                  {{ i18n.t().hero.stats.speciesDesc }}
                 </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
-                  {{ i18n.t().hero.stats.nurseries }}
+              </div>
+
+              <!-- Stat 3: Viveiros -->
+              <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
+                <div class="flex items-baseline gap-2">
+                  <p class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    {{ oasisService.currentNurseries() }}
+                  </p>
+                  <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    {{ i18n.t().hero.stats.nurseriesMeta }}
+                  </span>
+                </div>
+                <p class="text-[11px] font-medium text-gray-400 mt-1">
+                  {{ i18n.t().hero.stats.nurseriesDesc }}
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- Right: Brazil Map SVG with interactive animated markers -->
+          <!-- Right: Brazil Map SVG with expansion targets -->
           <div class="relative flex flex-col items-center justify-center">
             <div class="relative w-full max-w-lg">
               <!-- Ambient map glow -->
               <div class="absolute inset-0 bg-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
+
+              <!-- Map Header Badge -->
+              <div class="mb-3 text-center">
+                <span class="text-[11px] font-mono text-gray-400 uppercase tracking-widest bg-white/[0.04] px-3 py-1 rounded-full border border-white/5">
+                  {{ i18n.t().hero.mapLegend }}
+                </span>
+              </div>
 
               <svg
                 viewBox="0 0 500 520"
@@ -118,99 +154,91 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   stroke-width="1.8"
                 />
 
-                <!-- Internal Biome contour meshes -->
-                <path
-                  d="M140,160 Q210,130 270,170 T350,210"
-                  fill="none"
-                  stroke="#50C878"
-                  stroke-width="0.75"
-                  stroke-dasharray="3,3"
-                  opacity="0.3"
-                />
-                <path
-                  d="M170,260 Q240,240 310,290 T350,360"
-                  fill="none"
-                  stroke="#50C878"
-                  stroke-width="0.75"
-                  stroke-dasharray="3,3"
-                  opacity="0.3"
-                />
+                <!-- Inter-pole projected mesh lines (dashed to indicate future connection) -->
+                <line x1="200" y1="100" x2="380" y2="160" stroke="#50C878" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
+                <line x1="380" y1="160" x2="290" y2="250" stroke="#50C878" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
+                <line x1="290" y1="250" x2="330" y2="340" stroke="#50C878" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
+                <line x1="330" y1="340" x2="290" y2="400" stroke="#50C878" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
+                <line x1="200" y1="100" x2="290" y2="250" stroke="#50C878" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
 
-                <!-- Inter-pole telemetry mesh lines -->
-                <line x1="200" y1="100" x2="380" y2="160" stroke="#50C878" stroke-width="0.8" opacity="0.35" stroke-dasharray="4,4"/>
-                <line x1="380" y1="160" x2="290" y2="250" stroke="#50C878" stroke-width="0.8" opacity="0.35" stroke-dasharray="4,4"/>
-                <line x1="290" y1="250" x2="330" y2="340" stroke="#50C878" stroke-width="0.8" opacity="0.35" stroke-dasharray="4,4"/>
-                <line x1="330" y1="340" x2="290" y2="400" stroke="#50C878" stroke-width="0.8" opacity="0.35" stroke-dasharray="4,4"/>
-                <line x1="200" y1="100" x2="290" y2="250" stroke="#50C878" stroke-width="0.8" opacity="0.35" stroke-dasharray="4,4"/>
-
-                <!-- 1. Polo Norte (Manaus) -->
+                <!-- 1. Polo Norte (Meta de Expansão) -->
                 <g class="cursor-pointer" (mouseenter)="selectedPoleId.set('pole-norte')" (click)="selectedPoleId.set('pole-norte')">
-                  <circle cx="200" cy="100" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0s"/>
-                  <circle cx="200" cy="100" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
-                  <circle cx="200" cy="100" r="3" fill="#ffffff"/>
-                  <text x="200" y="80" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                  <circle cx="200" cy="100" r="14" fill="#50C878" opacity="0.1" stroke="#50C878" stroke-dasharray="2,2" class="animate-pulse-marker" style="animation-delay: 0s"/>
+                  <circle cx="200" cy="100" r="6" fill="#1a2e1a" stroke="#7DDFAA" stroke-width="1.5"/>
+                  <circle cx="200" cy="100" r="2.5" fill="#7DDFAA"/>
+                  <text x="200" y="80" text-anchor="middle" fill="#7DDFAA" font-size="10" font-weight="600" font-family="Inter, sans-serif">
                     {{ i18n.t().hero.mapPoles.norte }}
                   </text>
                 </g>
 
-                <!-- 2. Polo Nordeste (Recife) -->
+                <!-- 2. Polo Nordeste (Meta de Expansão) -->
                 <g class="cursor-pointer" (mouseenter)="selectedPoleId.set('pole-nordeste')" (click)="selectedPoleId.set('pole-nordeste')">
-                  <circle cx="380" cy="160" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0.4s"/>
-                  <circle cx="380" cy="160" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
-                  <circle cx="380" cy="160" r="3" fill="#ffffff"/>
-                  <text x="380" y="140" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                  <circle cx="380" cy="160" r="14" fill="#50C878" opacity="0.1" stroke="#50C878" stroke-dasharray="2,2" class="animate-pulse-marker" style="animation-delay: 0.4s"/>
+                  <circle cx="380" cy="160" r="6" fill="#1a2e1a" stroke="#7DDFAA" stroke-width="1.5"/>
+                  <circle cx="380" cy="160" r="2.5" fill="#7DDFAA"/>
+                  <text x="380" y="140" text-anchor="middle" fill="#7DDFAA" font-size="10" font-weight="600" font-family="Inter, sans-serif">
                     {{ i18n.t().hero.mapPoles.nordeste }}
                   </text>
                 </g>
 
-                <!-- 3. Polo Centro-Oeste (Brasília) -->
+                <!-- 3. Polo Centro-Oeste (Meta de Expansão) -->
                 <g class="cursor-pointer" (mouseenter)="selectedPoleId.set('pole-centro-oeste')" (click)="selectedPoleId.set('pole-centro-oeste')">
-                  <circle cx="290" cy="250" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0.8s"/>
-                  <circle cx="290" cy="250" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
-                  <circle cx="290" cy="250" r="3" fill="#ffffff"/>
-                  <text x="290" y="230" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                  <circle cx="290" cy="250" r="14" fill="#50C878" opacity="0.1" stroke="#50C878" stroke-dasharray="2,2" class="animate-pulse-marker" style="animation-delay: 0.8s"/>
+                  <circle cx="290" cy="250" r="6" fill="#1a2e1a" stroke="#7DDFAA" stroke-width="1.5"/>
+                  <circle cx="290" cy="250" r="2.5" fill="#7DDFAA"/>
+                  <text x="290" y="230" text-anchor="middle" fill="#7DDFAA" font-size="10" font-weight="600" font-family="Inter, sans-serif">
                     {{ i18n.t().hero.mapPoles.centroOeste }}
                   </text>
                 </g>
 
-                <!-- 4. Polo Sudeste (São Paulo / Vale) -->
+                <!-- 4. Polo Sudeste (Polo Piloto Inicial em Modelagem) -->
                 <g class="cursor-pointer" (mouseenter)="selectedPoleId.set('pole-sudeste')" (click)="selectedPoleId.set('pole-sudeste')">
-                  <circle cx="330" cy="340" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 1.2s"/>
-                  <circle cx="330" cy="340" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
+                  <circle cx="330" cy="340" r="16" fill="#f59e0b" opacity="0.2" class="animate-pulse-marker" style="animation-delay: 1.2s"/>
+                  <circle cx="330" cy="340" r="7" fill="#228B22" stroke="#f59e0b" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="330" cy="340" r="3" fill="#ffffff"/>
-                  <text x="330" y="320" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
-                    {{ i18n.t().hero.mapPoles.sudeste }}
+                  <text x="330" y="320" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="700" font-family="Inter, sans-serif">
+                    ★ {{ i18n.t().hero.mapPoles.sudeste }}
                   </text>
                 </g>
 
-                <!-- 5. Polo Sul (Curitiba) -->
+                <!-- 5. Polo Sul (Meta de Expansão) -->
                 <g class="cursor-pointer" (mouseenter)="selectedPoleId.set('pole-sul')" (click)="selectedPoleId.set('pole-sul')">
-                  <circle cx="290" cy="400" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 1.6s"/>
-                  <circle cx="290" cy="400" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
-                  <circle cx="290" cy="400" r="3" fill="#ffffff"/>
-                  <text x="290" y="425" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                  <circle cx="290" cy="400" r="14" fill="#50C878" opacity="0.1" stroke="#50C878" stroke-dasharray="2,2" class="animate-pulse-marker" style="animation-delay: 1.6s"/>
+                  <circle cx="290" cy="400" r="6" fill="#1a2e1a" stroke="#7DDFAA" stroke-width="1.5"/>
+                  <circle cx="290" cy="400" r="2.5" fill="#7DDFAA"/>
+                  <text x="290" y="425" text-anchor="middle" fill="#7DDFAA" font-size="10" font-weight="600" font-family="Inter, sans-serif">
                     {{ i18n.t().hero.mapPoles.sul }}
                   </text>
                 </g>
               </svg>
 
-              <!-- Interactive Floating Glass Card for Selected Pole -->
+              <!-- Interactive Floating Glass Card for Selected Target Pole -->
               @if (currentPole(); as pole) {
                 <div class="mt-4 p-4 rounded-2xl glass-strong border border-emerald/30 shadow-xl transition-all duration-300">
                   <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-bold text-emerald uppercase tracking-wider flex items-center gap-1.5">
-                      <span class="w-2 h-2 rounded-full bg-emerald"></span>
+                      <span class="w-2 h-2 rounded-full" [class]="pole.status === 'polo_piloto' ? 'bg-amber-400' : 'bg-emerald'"></span>
                       {{ pole.name }}
                     </span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald/10 text-emerald-light border border-emerald/20 font-semibold uppercase">
-                      {{ i18n.t().hero.poleStatus }}
+                    <span
+                      class="text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase border"
+                      [class]="pole.status === 'polo_piloto'
+                        ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
+                        : 'bg-emerald/10 text-emerald-light border-emerald/20'"
+                    >
+                      {{ pole.status === 'polo_piloto' ? i18n.t().hero.poleStatusPilot : i18n.t().hero.poleStatusTarget }}
                     </span>
                   </div>
-                  <p class="text-xs text-gray-300 mb-2 font-medium">{{ pole.location }}</p>
-                  <div class="flex items-center gap-4 text-[11px] text-gray-400">
-                    <span>🌱 <strong class="text-white">{{ pole.speciesCount }}</strong> {{ i18n.t().hero.speciesLabel }}</span>
-                    <span>🏡 <strong class="text-white">{{ pole.nurseryPartners }}</strong> {{ i18n.t().hero.nurseriesLabel }}</span>
-                    <span>📍 {{ pole.primaryBiomes.join(', ') }}</span>
+                  <p class="text-xs text-gray-300 mb-2 font-medium">{{ pole.targetRegion }}</p>
+                  <div class="grid grid-cols-2 gap-2 text-[11px] text-gray-400 pt-2 border-t border-white/5">
+                    <div>
+                      <span>🌱 {{ i18n.t().hero.speciesLabel }}:</span>
+                      <strong class="text-white ml-1">Meta {{ pole.targetSpeciesCount }}</strong>
+                    </div>
+                    <div>
+                      <span>🏡 {{ i18n.t().hero.nurseriesLabel }}:</span>
+                      <strong class="text-white ml-1">Meta {{ pole.targetNurseryPartners }}</strong>
+                    </div>
                   </div>
                 </div>
               }

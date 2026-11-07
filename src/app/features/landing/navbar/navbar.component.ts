@@ -11,12 +11,12 @@ import { SupportedLanguage } from '../../../core/i18n/translations';
       [class.glass-strong]="scrolled()"
       [class.bg-transparent]="!scrolled()"
     >
-      <!-- Top Language Banner Bar -->
-      <div class="border-b border-white/5 bg-black/40 backdrop-blur-md">
+      <!-- Top Development / Pilot Banner Bar -->
+      <div class="border-b border-amber-500/20 bg-black/60 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between text-xs">
-          <div class="hidden sm:flex items-center gap-2 text-gray-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>
-            <span class="text-[11px] font-mono tracking-wider">BIO-INFRASTRUCTURE // PROTOCOL v2.4</span>
+          <div class="flex items-center gap-2 text-amber-300 font-mono text-[10px] sm:text-[11px] tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span class="font-bold">{{ i18n.t().topBanner }}</span>
           </div>
 
           <!-- Language Selector at the Top (pt-br, en-us, es-es) -->
@@ -52,9 +52,12 @@ import { SupportedLanguage } from '../../../core/i18n/translations';
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
               </svg>
             </div>
-            <span class="text-lg font-bold text-white group-hover:text-emerald transition-colors tracking-tight">
-              Rede <span class="text-emerald">Oásis</span>
-            </span>
+            <div class="flex flex-col">
+              <span class="text-lg font-bold text-white group-hover:text-emerald transition-colors tracking-tight leading-tight">
+                Rede <span class="text-emerald">Oásis</span>
+              </span>
+              <span class="text-[9px] font-mono text-amber-400 uppercase tracking-widest leading-none">Fase Piloto</span>
+            </div>
           </a>
 
           <!-- Desktop Navigation Anchor Links (Translated) -->

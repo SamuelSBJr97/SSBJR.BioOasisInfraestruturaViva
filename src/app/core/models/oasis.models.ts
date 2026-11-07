@@ -1,13 +1,17 @@
+export type PoleStatus = 'em_planejamento' | 'meta_expansao' | 'polo_piloto';
+
 export interface RegionalPole {
   id: string;
   name: string;
-  location: string;
-  status: 'operacional' | 'em_expansao' | 'planejado';
-  speciesCount: number;
-  nurseryPartners: number;
+  targetRegion: string;
+  status: PoleStatus;
+  targetSpeciesCount: number;
+  currentSpeciesCount: number;
+  targetNurseryPartners: number;
+  currentNurseryPartners: number;
   latitude: number;
   longitude: number;
-  primaryBiomes: string[];
+  targetBiomes: string[];
 }
 
 export interface BiologicalModule {
@@ -20,6 +24,7 @@ export interface BiologicalModule {
 }
 
 export interface TraceableAsset {
+  isPrototype: boolean;
   rfidTag: string;
   qrCodeId: string;
   speciesScientificName: string;
@@ -41,13 +46,4 @@ export interface SaaSContract {
   monthlyPreBilledValue: number;
   slaUptimePercentage: number;
   telemetryActive: boolean;
-}
-
-export interface RoiSimulationResult {
-  estimatedCostOasis: number;
-  estimatedCostTraditionalConcrete: number;
-  financialSavings: number;
-  savingsPercentage: number;
-  co2OffsetTonsAnnual: number;
-  nurseriesSupported: number;
 }

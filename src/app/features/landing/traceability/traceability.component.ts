@@ -25,7 +25,7 @@ import { TranslationService } from '../../../core/services/translation.service';
 
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <!-- Left: Mockup Visual de Leitura QR Code / RFID (5 Cols) -->
-          <div class="lg:col-span-5 relative flex justify-center">
+          <div class="lg:col-span-5 relative flex flex-col items-center">
             <div class="relative w-full max-w-sm">
               <!-- Glow backer -->
               <div class="absolute -inset-4 bg-emerald/10 rounded-[3rem] blur-2xl"></div>
@@ -37,10 +37,7 @@ import { TranslationService } from '../../../core/services/translation.service';
                   <div class="flex items-center justify-between text-[11px] text-gray-400 mb-6 px-1">
                     <span class="font-semibold text-white">09:41</span>
                     <div class="flex items-center gap-1.5">
-                      <span class="text-[9px] px-1 py-0.2 rounded bg-emerald/20 text-emerald font-bold">5G</span>
-                      <svg class="w-3.5 h-3.5 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.27 19.64 10.59 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-                      </svg>
+                      <span class="text-[9px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold">MOCKUP</span>
                       <div class="w-4 h-2 rounded-sm border border-gray-400 flex items-center p-0.5">
                         <div class="w-full h-full bg-emerald rounded-2xs"></div>
                       </div>
@@ -49,10 +46,10 @@ import { TranslationService } from '../../../core/services/translation.service';
 
                   <!-- Scanner Header -->
                   <div class="text-center mb-5">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald/10 border border-emerald/20">
-                      <span class="w-2 h-2 rounded-full bg-emerald animate-ping"></span>
-                      <span class="text-[10px] font-bold text-emerald uppercase tracking-wider">
-                        {{ i18n.t().traceability.scanner.liveBadge }}
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30">
+                      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                      <span class="text-[10px] font-bold text-amber-300 uppercase tracking-wider">
+                        {{ i18n.t().traceability.scanner.prototypeBadge }}
                       </span>
                     </div>
                   </div>
@@ -102,7 +99,7 @@ import { TranslationService } from '../../../core/services/translation.service';
                     <span>{{ i18n.t().traceability.scanner.cycleButton }}</span>
                   </button>
 
-                  <!-- Scanned Telemetry Output Data -->
+                  <!-- Scanned Telemetry Output Data (Clearly marked as Conceptual Prototype) -->
                   <div class="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2 text-xs">
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
                       <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.species }}:</span>
@@ -112,7 +109,7 @@ import { TranslationService } from '../../../core/services/translation.service';
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
                       <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.batch }}:</span>
-                      <span class="text-emerald font-mono font-bold">{{ oasisService.activeAsset().batchNumber }}</span>
+                      <span class="text-amber-300 font-mono font-bold">{{ oasisService.activeAsset().batchNumber }}</span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
                       <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.origin }}:</span>
@@ -120,18 +117,21 @@ import { TranslationService } from '../../../core/services/translation.service';
                         {{ oasisService.activeAsset().poleOrigin }}
                       </span>
                     </div>
-                    <div class="flex justify-between items-center pb-2 border-b border-white/5">
-                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.vitality }}:</span>
-                      <span class="text-emerald font-bold">{{ oasisService.activeAsset().healthIndex }}%</span>
-                    </div>
                     <div class="flex justify-between items-center">
-                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.rootStrength }}:</span>
-                      <span class="text-emerald-light font-mono font-semibold">{{ oasisService.activeAsset().rootTensileStrengthMPa }} MPa</span>
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.status }}:</span>
+                      <span class="text-emerald font-medium text-right text-[11px]">
+                        {{ oasisService.activeAsset().verifiedAt }}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Conceptual Disclaimer Caption -->
+            <p class="text-[11px] text-gray-500 text-center max-w-xs mt-3">
+              * Interface conceitual demonstrativa do fluxo de verificação biológica via QR/RFID projetado para os futuros viveiros homologados.
+            </p>
           </div>
 
           <!-- Right: SaaS Model & Pre-billed Contracts (7 Cols) -->
