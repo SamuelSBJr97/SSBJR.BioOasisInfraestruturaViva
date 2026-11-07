@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "generate:assets": "node scripts/generate-assets.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -25,8 +26,10 @@
     "@angular/cli": "^22.2.6",
     "@angular/compiler-cli": "^22.2.0",
     "@tailwindcss/postcss": "^4.3.5",
+    "png-to-ico": "^3.0.2",
     "postcss": "^8.5.32",
     "prettier": "^3.8.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.5",
     "typescript": "~6.0.2"
   },

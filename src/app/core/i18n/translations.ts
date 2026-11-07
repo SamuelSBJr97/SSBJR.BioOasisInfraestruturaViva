@@ -7,6 +7,7 @@ export interface TranslationDictionary {
       hero: string;
       paradigm: string;
       regional: string;
+      roadmap: string;
       traceability: string;
       contact: string;
     };
@@ -117,6 +118,40 @@ export interface TranslationDictionary {
       bullet3: string;
     };
   };
+  roadmap: {
+    tag: string;
+    title: string;
+    highlight: string;
+    subtitle: string;
+    phase1: {
+      badge: string;
+      status: string;
+      title: string;
+      desc: string;
+      items: string[];
+    };
+    phase2: {
+      badge: string;
+      status: string;
+      title: string;
+      desc: string;
+      items: string[];
+    };
+    phase3: {
+      badge: string;
+      status: string;
+      title: string;
+      desc: string;
+      items: string[];
+    };
+    phase4: {
+      badge: string;
+      status: string;
+      title: string;
+      desc: string;
+      items: string[];
+    };
+  };
   traceability: {
     tag: string;
     title: string;
@@ -147,6 +182,27 @@ export interface TranslationDictionary {
       bullet3Desc: string;
     };
   };
+  pilotCalculator: {
+    tag: string;
+    title: string;
+    highlight: string;
+    subtitle: string;
+    extensionLabel: string;
+    applicationLabel: string;
+    options: {
+      slope: string;
+      water: string;
+      phytoremediation: string;
+    };
+    results: {
+      plantsTarget: string;
+      nurseriesTarget: string;
+      readinessTime: string;
+      readinessValue: string;
+      co2Target: string;
+    };
+    cta: string;
+  };
   footer: {
     desc: string;
     dna: string;
@@ -155,6 +211,7 @@ export interface TranslationDictionary {
       hero: string;
       paradigm: string;
       regional: string;
+      roadmap: string;
       traceability: string;
       telemetry: string;
       soonBadge: string;
@@ -197,6 +254,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Início',
         paradigm: 'Paradigma',
         regional: 'Oásis Regionais',
+        roadmap: 'Roadmap',
         traceability: 'Rastreabilidade',
         contact: 'Seja Parceiro',
       },
@@ -337,6 +395,61 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         bullet3: 'Remuneração justa e previsível vinculada a contratos corporativos',
       },
     },
+    roadmap: {
+      tag: 'Linha do Tempo do Projeto',
+      title: 'Roadmap de',
+      highlight: 'Desenvolvimento e Metas',
+      subtitle:
+        'Conheça os estágios planejados para sair do zero até a plena conexão dos cinco polos da rede nacional.',
+      phase1: {
+        badge: 'Fase 01',
+        status: 'Fase Atual (Em Andamento)',
+        title: 'Concepção & Modelagem Técnica',
+        desc: 'Estruturação conceitual, modelagem botânica dos módulos e abertura do cadastro para viveiros parceiros pioneiros.',
+        items: [
+          'Desenho dos módulos geotécnicos e hídricos',
+          'Mapeamento inicial das 150 espécies prioritárias',
+          'Abertura de parcerias com viveiristas no Sudeste',
+          'Validação da arquitetura digital de rastreabilidade',
+        ],
+      },
+      phase2: {
+        badge: 'Fase 02',
+        status: 'Meta 2026 Q3-Q4',
+        title: 'Polo Piloto Sudeste (Validação)',
+        desc: 'Implantação da primeira área experimental em campo na Serra do Mar para testar retenção mecânica e telemetria.',
+        items: [
+          'Instalação de lote piloto em talude de encosta',
+          'Homologação dos primeiros 3 viveiros fundadores',
+          'Testes de campo com chips RFID/QR em mudas',
+          'Coleta de dados de coesão radicular e umidade',
+        ],
+      },
+      phase3: {
+        badge: 'Fase 03',
+        status: 'Meta 2027',
+        title: 'Primeiros Contratos SaaS Piloto',
+        desc: 'Validação comercial do modelo de contratos pré-faturados com concessionárias rodoviárias e indústrias parceiras.',
+        items: [
+          'Acordo piloto de garantia biológica com concessionária',
+          'Auditoria digital fitossanitária via aplicativo mobile',
+          'Remuneração recorrente aos viveiristas homologados',
+          'Emissão de primeiros relatórios de conformidade ESG',
+        ],
+      },
+      phase4: {
+        badge: 'Fase 04',
+        status: 'Meta 2027-2028',
+        title: 'Expansão Nacional (5 Polos)',
+        desc: 'Ativação progressiva dos Polos Norte, Nordeste, Centro-Oeste e Sul, conectando a infraestrutura viva do Brasil.',
+        items: [
+          'Credenciamento de 50+ viveiros em todos os biomas',
+          'Ativação do banco estratégico interligado em nuvem',
+          'Logística de atendimento emergencial em 48 horas',
+          'Rede operando em escala nacional descentralizada',
+        ],
+      },
+    },
     traceability: {
       tag: 'Governança & Rastreabilidade',
       title: 'Cada Planta,',
@@ -371,6 +484,28 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
           'Desenvolvimento futuro de sensores de umidade e tensão para geração de relatórios de conformidade e indicadores de mitigação de riscos climáticos.',
       },
     },
+    pilotCalculator: {
+      tag: 'Simulador de Projeto Piloto',
+      title: 'Dimensionamento de',
+      highlight: 'Área Experimental',
+      subtitle:
+        'Simule a projeção de recursos biológicos necessários para estruturar um lote piloto de validação em sua concessão ou município.',
+      extensionLabel: 'Extensão Linear Alvo (Metros)',
+      applicationLabel: 'Aplicação de Engenharia em Estudo',
+      options: {
+        slope: 'Contenção de Encosta / Talude Geotécnico',
+        water: 'Depuração Hídrica / Wetlands Construídos',
+        phytoremediation: 'Fitorremediação de Solos & Mineração',
+      },
+      results: {
+        plantsTarget: 'Mudas Projetadas para o Lote Piloto',
+        nurseriesTarget: 'Viveiros Locais Necessários para Suporte',
+        readinessTime: 'Tempo Estimado de Enraizamento Modular',
+        readinessValue: '6 a 12 semanas',
+        co2Target: 'Meta de Absorção Estimada de CO2/ano',
+      },
+      cta: 'Solicitar Proposta para Projeto Piloto',
+    },
     footer: {
       desc: 'Projeto em desenvolvimento de infraestrutura biológica descentralizada para resiliência territorial e proteção de ativos críticos no Brasil.',
       dna: 'Projeto Aberto à Parcerias e Pilotos 🇧🇷',
@@ -379,6 +514,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Início',
         paradigm: 'Mudança de Paradigma',
         regional: 'Metas Regionais',
+        roadmap: 'Roadmap de Fases',
         traceability: 'Rastreabilidade (Protótipo)',
         telemetry: 'Telemetria',
         soonBadge: 'Em Breve',
@@ -421,6 +557,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Home',
         paradigm: 'Paradigm Shift',
         regional: 'Regional Targets',
+        roadmap: 'Roadmap',
         traceability: 'Traceability',
         contact: 'Become a Partner',
       },
@@ -561,6 +698,61 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         bullet3: 'Predictable compensation linked to multi-year corporate contracts',
       },
     },
+    roadmap: {
+      tag: 'Project Timeline',
+      title: 'Roadmap of',
+      highlight: 'Development & Milestones',
+      subtitle:
+        'Discover the planned stages to transition from zero to the full national interconnection of the five regional hubs.',
+      phase1: {
+        badge: 'Phase 01',
+        status: 'Current Phase (In Progress)',
+        title: 'Conception & Technical Modeling',
+        desc: 'Conceptual framework, botanical module modeling, and opening onboarding for pioneer nursery partners.',
+        items: [
+          'Design of geotechnical and water depuration bio-mats',
+          'Initial mapping of 150 priority native species',
+          'Opening partnership outreach with nurseries in the Southeast',
+          'Validation of digital traceability data architecture',
+        ],
+      },
+      phase2: {
+        badge: 'Phase 02',
+        status: 'Target 2026 Q3-Q4',
+        title: 'Southeast Pilot Hub (Field Trial)',
+        desc: 'Deployment of the first experimental slope in Serra do Mar to test root tensile shear and field telemetry.',
+        items: [
+          'Installation of pilot trial on steep geotechnical slope',
+          'Certification of first 3 founding partner nurseries',
+          'Field trials with RFID/QR tags on living seedlings',
+          'Sensor data collection for root shear and moisture',
+        ],
+      },
+      phase3: {
+        badge: 'Phase 03',
+        status: 'Target 2027',
+        title: 'First Commercial Pilot Contracts',
+        desc: 'Commercial validation of pre-billed contracts with highway operators, mining concessions, and industrial partners.',
+        items: [
+          'Pilot biological capacity agreement with highway operator',
+          'Mobile app-assisted phytosanitary inspection audits',
+          'Recurring capacity retainer payouts to partner nurseries',
+          'Publication of auditable ESG risk-reduction reports',
+        ],
+      },
+      phase4: {
+        badge: 'Phase 04',
+        status: 'Target 2027-2028',
+        title: 'National Expansion (5 Regional Hubs)',
+        desc: 'Progressive activation of North, Northeast, Midwest, and South Hubs, establishing Brazil’s live infrastructure grid.',
+        items: [
+          'Onboarding of 50+ partner nurseries across all biomes',
+          'Full activation of cloud-connected strategic germplasm bank',
+          'Operational 48-hour emergency module deployment logistics',
+          'Fully decentralized national live infrastructure network',
+        ],
+      },
+    },
     traceability: {
       tag: 'Governance & Traceability',
       title: 'Every Plant,',
@@ -595,6 +787,28 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
           'Future integration of IoT soil moisture and root shear sensors generating auditable ESG compliance data.',
       },
     },
+    pilotCalculator: {
+      tag: 'Pilot Project Sizing Tool',
+      title: 'Experimental Pilot',
+      highlight: 'Resource Estimator',
+      subtitle:
+        'Simulate projected biological resources required to structure an experimental validation pilot in your concession or territory.',
+      extensionLabel: 'Target Linear Extension (Meters)',
+      applicationLabel: 'Engineering Application Under Study',
+      options: {
+        slope: 'Slope & Embankment Geotechnical Containment',
+        water: 'Water Depuration & Constructed Wetlands',
+        phytoremediation: 'Soil Phytoremediation & Mining Tailings',
+      },
+      results: {
+        plantsTarget: 'Projected Seedlings for Pilot Trial',
+        nurseriesTarget: 'Local Partner Nurseries Needed',
+        readinessTime: 'Estimated Modular Rooting Period',
+        readinessValue: '6 to 12 weeks',
+        co2Target: 'Projected Annual CO2 Sequestration Target',
+      },
+      cta: 'Request Pilot Trial Proposal',
+    },
     footer: {
       desc: 'Project in development establishing a decentralized biological infrastructure network for territorial resilience in Brazil.',
       dna: 'Open Project for Partnerships and Pilots 🇧🇷',
@@ -603,6 +817,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Home',
         paradigm: 'Paradigm Shift',
         regional: 'Regional Targets',
+        roadmap: 'Phased Roadmap',
         traceability: 'Traceability (Prototype)',
         telemetry: 'Telemetry',
         soonBadge: 'Coming Soon',
@@ -645,6 +860,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Inicio',
         paradigm: 'Paradigma',
         regional: 'Metas Regionales',
+        roadmap: 'Roadmap',
         traceability: 'Trazabilidad',
         contact: 'Ser Socio',
       },
@@ -756,7 +972,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
             { label: 'Monitoreo', value: 'IoT en Prototipado' },
             { label: 'Enfoque', value: 'Sucesión Multiestrato' },
           ],
-          role: 'Técnicos locales ejecutarán la plantación y el seguimiento fitosanitario en las parcelas piloto.',
+          role: 'Los ingenieros biológicos ejecutarán la plantación y el seguimiento fitosanitario en las parcelas piloto.',
           sla: 'Metas de intervención rápida diseñadas para respuesta ante desastres geológicos.',
         },
         estoque: {
@@ -777,12 +993,67 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         },
       },
       humanRole: {
-        tag: 'Construcción Colectiva',
+        tag: 'Construcción Coletiva',
         title: 'Ingenieros Biológicos de Base',
         desc: 'El proyecto sitúa a los viveristas y productores rurales como actores clave de la infraestructura, ofreciendo formación técnica e inclusión en contratos plurianuales.',
         bullet1: 'Convocatoria abierta para viveros que deseen constituirse en nodos piloto',
         bullet2: 'Capacitación en trazabilidad digital y protocolos de calidad fitosanitaria',
         bullet3: 'Remuneración justa y previsible ligada a contratos corporativos estables',
+      },
+    },
+    roadmap: {
+      tag: 'Cronograma del Proyecto',
+      title: 'Roadmap de',
+      highlight: 'Desarrollo y Metas',
+      subtitle:
+        'Conozca las etapas planificadas para avanzar desde cero hasta la interconexión de los cinco polos regionales.',
+      phase1: {
+        badge: 'Fase 01',
+        status: 'Fase Actual (En Curso)',
+        title: 'Concepción y Modelado Técnico',
+        desc: 'Definición conceptual, modelado botánico de módulos y apertura de convocatorias para viveros pioneros.',
+        items: [
+          'Diseño de mantas modulares geotécnicas e hídricas',
+          'Mapeo inicial de 150 especies autóctonas prioritarias',
+          'Alianzas iniciales con viveros en la región Sureste',
+          'Validación de la arquitectura de trazabilidad digital',
+        ],
+      },
+      phase2: {
+        badge: 'Fase 02',
+        status: 'Meta 2026 Q3-Q4',
+        title: 'Polo Piloto Sureste (Validación)',
+        desc: 'Instalación de la primera parcela experimental en campo para evaluar resistencia al deslizamiento y telemetría.',
+        items: [
+          'Prueba piloto en talud crítico de ladera',
+          'Certificación de los primeros 3 viveros fundadores',
+          'Ensayos de campo con chips RFID/QR en plántulas',
+          'Monitoreo de tracción radicular y humedad de suelo',
+        ],
+      },
+      phase3: {
+        badge: 'Fase 03',
+        status: 'Meta 2027',
+        title: 'Primeros Contratos SaaS Piloto',
+        desc: 'Validación comercial de contratos de capacidad biológica con autopistas, mineras e industrias asociadas.',
+        items: [
+          'Acuerdo piloto de reserva biológica con concesionaria',
+          'Auditoría fitosanitaria digital mediante app móvil',
+          'Remuneración fija periódica a viveros homologados',
+          'Generación de informes de mitigación de riesgos ESG',
+        ],
+      },
+      phase4: {
+        badge: 'Fase 04',
+        status: 'Meta 2027-2028',
+        title: 'Expansión Nacional (5 Polos)',
+        desc: 'Puesta en marcha paulatina de los Polos Norte, Nordeste, Centro-Oeste y Sur conectando la red viva de Brasil.',
+        items: [
+          'Incorporación de 50+ viveros en todos los biomas',
+          'Activación del banco estratégico conectado en la nube',
+          'Logística de respuesta para emergencias en 48 horas',
+          'Red nacional descentralizada operando a escala',
+        ],
       },
     },
     traceability: {
@@ -819,6 +1090,28 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
           'Desarrollo futuro de sensores IoT de humedad y tracción para emitir informes verificables según normas ESG internacionales.',
       },
     },
+    pilotCalculator: {
+      tag: 'Simulador de Proyecto Piloto',
+      title: 'Dimensionamiento de',
+      highlight: 'Área Experimental',
+      subtitle:
+        'Simule la estimación de recursos biológicos necesarios para estructurar un lote piloto de validación en su concesión o territorio.',
+      extensionLabel: 'Extensión Lineal Objetivo (Metros)',
+      applicationLabel: 'Aplicación de Ingeniería en Estudio',
+      options: {
+        slope: 'Contención de Laderas y Taludes Geotécnicos',
+        water: 'Depuración Hídrica y Humedales Construidos',
+        phytoremediation: 'Fitorremediación de Suelos Mineros',
+      },
+      results: {
+        plantsTarget: 'Plántulas Estimadas para el Lote Piloto',
+        nurseriesTarget: 'Viveros Locales Necesarios de Apoyo',
+        readinessTime: 'Tiempo Estimado de Enraizamiento Modular',
+        readinessValue: '6 a 12 semanas',
+        co2Target: 'Meta Estimada de Fijación Anual de CO2',
+      },
+      cta: 'Solicitar Propuesta para Proyecto Piloto',
+    },
     footer: {
       desc: 'Proyecto en desarrollo de infraestructura biológica descentralizada para resiliencia territorial y protección de infraestructuras críticas.',
       dna: 'Proyecto Abierto a Alianzas y Proyectos Piloto 🇧🇷',
@@ -827,6 +1120,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
         hero: 'Inicio',
         paradigm: 'Cambio de Paradigma',
         regional: 'Metas Regionales',
+        roadmap: 'Roadmap de Fases',
         traceability: 'Trazabilidad (Prototipo)',
         telemetry: 'Telemetría',
         soonBadge: 'En Breve',
