@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SectionHeadingComponent } from '../../../shared/components/section-heading/section-heading.component';
 import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
+import { TranslationService } from '../../../core/services/translation.service';
 
 @Component({
   selector: 'app-paradigm-shift',
@@ -11,10 +12,10 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Heading via Shared Component -->
         <app-section-heading
-          tag="Mudança de Paradigma"
-          title="De Ornamental para"
-          highlight="Missão Crítica"
-          subtitle="A infraestrutura biológica não é paisagismo decorativo — é engenharia viva para proteção de ativos essenciais."
+          [tag]="i18n.t().paradigm.tag"
+          [title]="i18n.t().paradigm.title"
+          [highlight]="i18n.t().paradigm.highlight"
+          [subtitle]="i18n.t().paradigm.subtitle"
         />
 
         <!-- Cards Grid -->
@@ -30,12 +31,16 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
             >
               <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-800/80 border border-gray-700/60 mb-6">
                 <span class="w-2 h-2 rounded-full bg-gray-500"></span>
-                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Modelo Tradicional</span>
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  {{ i18n.t().paradigm.traditional.badge }}
+                </span>
               </div>
 
-              <h3 class="text-2xl font-bold text-gray-300 mb-3">Exportação Ornamental</h3>
+              <h3 class="text-2xl font-bold text-gray-300 mb-3">
+                {{ i18n.t().paradigm.traditional.title }}
+              </h3>
               <p class="text-gray-400 mb-8 leading-relaxed text-sm md:text-base">
-                Espécies comercializadas como produtos decorativos de baixo valor agregado. Cadeia fragmentada, sem comprovação técnica e sem métricas de estabilidade ou impacto ecológico.
+                {{ i18n.t().paradigm.traditional.desc }}
               </p>
 
               <ul class="space-y-5">
@@ -46,8 +51,12 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                     </svg>
                   </div>
                   <div>
-                    <p class="text-gray-300 font-semibold text-sm">Produto Commodity Passivo</p>
-                    <p class="text-xs text-gray-400">Venda isolada de mudas sem projeto técnico ou compatibilização com obras civis.</p>
+                    <p class="text-gray-300 font-semibold text-sm">
+                      {{ i18n.t().paradigm.traditional.item1Title }}
+                    </p>
+                    <p class="text-xs text-gray-400">
+                      {{ i18n.t().paradigm.traditional.item1Desc }}
+                    </p>
                   </div>
                 </li>
                 <li class="flex items-start gap-3.5">
@@ -57,8 +66,12 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                     </svg>
                   </div>
                   <div>
-                    <p class="text-gray-300 font-semibold text-sm">Cadeia Fragmentada e Sem Rastreio</p>
-                    <p class="text-xs text-gray-400">Origem biológica desconhecida, vulnerável a pragas e perdas drásticas pós-plantio.</p>
+                    <p class="text-gray-300 font-semibold text-sm">
+                      {{ i18n.t().paradigm.traditional.item2Title }}
+                    </p>
+                    <p class="text-xs text-gray-400">
+                      {{ i18n.t().paradigm.traditional.item2Desc }}
+                    </p>
                   </div>
                 </li>
                 <li class="flex items-start gap-3.5">
@@ -68,8 +81,12 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                     </svg>
                   </div>
                   <div>
-                    <p class="text-gray-300 font-semibold text-sm">Risco Geotécnico Elevado</p>
-                    <p class="text-xs text-gray-400">Ausência de garantias de estabilidade, resultando em retrabalho e despesas corretivas.</p>
+                    <p class="text-gray-300 font-semibold text-sm">
+                      {{ i18n.t().paradigm.traditional.item3Title }}
+                    </p>
+                    <p class="text-xs text-gray-400">
+                      {{ i18n.t().paradigm.traditional.item3Desc }}
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -90,19 +107,24 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
             >
               <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald/15 border border-emerald/30 mb-6 shadow-sm shadow-emerald/20">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald animate-pulse"></span>
-                <span class="text-xs font-bold text-emerald uppercase tracking-wider">Rede Oásis — Padrão Ativo</span>
+                <span class="text-xs font-bold text-emerald uppercase tracking-wider">
+                  {{ i18n.t().paradigm.oasis.badge }}
+                </span>
               </div>
 
               <h3 class="text-2xl lg:text-3xl font-extrabold text-white mb-3">
-                Exportação de <span class="bg-gradient-to-r from-emerald via-emerald-light to-white bg-clip-text text-transparent">Missão Crítica</span>
+                {{ i18n.t().paradigm.oasis.title }}
+                <span class="bg-gradient-to-r from-emerald via-emerald-light to-white bg-clip-text text-transparent">
+                  {{ i18n.t().paradigm.oasis.highlight }}
+                </span>
               </h3>
               <p class="text-gray-300 mb-8 leading-relaxed text-sm md:text-base">
-                Módulos padronizados de bioengenharia projetados com especificações geotécnicas para assegurar continuidade operacional e compliance rigoroso.
+                {{ i18n.t().paradigm.oasis.desc }}
               </p>
 
               <!-- Módulos Detalhados -->
               <div class="space-y-4">
-                <!-- Módulo 1: Contenção de Encostas -->
+                <!-- Módulo 1 -->
                 <div class="p-4 rounded-2xl bg-white/[0.03] border border-emerald/20 hover:border-emerald/40 transition-colors">
                   <div class="flex items-start gap-3">
                     <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-forest to-emerald flex items-center justify-center shrink-0 shadow-md shadow-emerald/20">
@@ -111,15 +133,17 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                       </svg>
                     </div>
                     <div>
-                      <h4 class="text-white font-bold text-sm md:text-base">Contenção de Encostas & Taludes</h4>
+                      <h4 class="text-white font-bold text-sm md:text-base">
+                        {{ i18n.t().paradigm.oasis.mod1Title }}
+                      </h4>
                       <p class="text-xs text-gray-300 mt-1">
-                        Sistemas radiculares tridimensionais de alta coesão e ancoragem física contra erosão laminar e escorregamentos em rodovias, ferrovias e mineradoras.
+                        {{ i18n.t().paradigm.oasis.mod1Desc }}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <!-- Módulo 2: Depuração Hídrica -->
+                <!-- Módulo 2 -->
                 <div class="p-4 rounded-2xl bg-white/[0.03] border border-emerald/20 hover:border-emerald/40 transition-colors">
                   <div class="flex items-start gap-3">
                     <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-forest to-emerald flex items-center justify-center shrink-0 shadow-md shadow-emerald/20">
@@ -128,15 +152,17 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                       </svg>
                     </div>
                     <div>
-                      <h4 class="text-white font-bold text-sm md:text-base">Depuração Hídrica & Wetlands Construídos</h4>
+                      <h4 class="text-white font-bold text-sm md:text-base">
+                        {{ i18n.t().paradigm.oasis.mod2Title }}
+                      </h4>
                       <p class="text-xs text-gray-300 mt-1">
-                        Filtros biológicos microbiológicos para bacias de contenção, canais industriais e drenagem pluvial urbana, retendo 85%+ de contaminantes solúveis.
+                        {{ i18n.t().paradigm.oasis.mod2Desc }}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <!-- Módulo 3: Fitorremediação -->
+                <!-- Módulo 3 -->
                 <div class="p-4 rounded-2xl bg-white/[0.03] border border-emerald/20 hover:border-emerald/40 transition-colors">
                   <div class="flex items-start gap-3">
                     <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-forest to-emerald flex items-center justify-center shrink-0 shadow-md shadow-emerald/20">
@@ -145,9 +171,11 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
                       </svg>
                     </div>
                     <div>
-                      <h4 class="text-white font-bold text-sm md:text-base">Fitorremediação de Solos & Substratos</h4>
+                      <h4 class="text-white font-bold text-sm md:text-base">
+                        {{ i18n.t().paradigm.oasis.mod3Title }}
+                      </h4>
                       <p class="text-xs text-gray-300 mt-1">
-                        Hiperacumuladoras calibradas para neutralização e imobilização de metais pesados, hidrocarbonetos e resíduos industriais em sítios degradados.
+                        {{ i18n.t().paradigm.oasis.mod3Desc }}
                       </p>
                     </div>
                   </div>
@@ -160,4 +188,6 @@ import { GlassCardComponent } from '../../../shared/components/glass-card/glass-
     </section>
   `,
 })
-export class ParadigmShiftComponent {}
+export class ParadigmShiftComponent {
+  protected readonly i18n = inject(TranslationService);
+}

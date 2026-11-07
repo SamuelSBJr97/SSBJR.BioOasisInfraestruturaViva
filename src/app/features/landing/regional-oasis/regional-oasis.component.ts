@@ -1,18 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { SectionHeadingComponent } from '../../../shared/components/section-heading/section-heading.component';
 import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
-
-interface Pillar {
-  id: string;
-  title: string;
-  badge: string;
-  iconSvg: string;
-  shortDescription: string;
-  fullDescription: string;
-  specs: { label: string; value: string }[];
-  baseEngineersRole: string;
-  actionSLA: string;
-}
+import { TranslationService } from '../../../core/services/translation.service';
 
 @Component({
   selector: 'app-regional-oasis',
@@ -28,16 +17,17 @@ interface Pillar {
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Heading via Shared Component -->
         <app-section-heading
-          tag="Oásis Regionais"
-          title="Os Três Pilares da"
-          highlight="Rede Descentralizada"
-          subtitle="Cada nó opera de forma autônoma e interconectada, multiplicando a resiliência biológica em cinco macrorregiões do Brasil."
+          [tag]="i18n.t().regional.tag"
+          [title]="i18n.t().regional.title"
+          [highlight]="i18n.t().regional.highlight"
+          [subtitle]="i18n.t().regional.subtitle"
         />
 
         <!-- Tab Selection Navigation -->
         <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-          @for (pillar of pillars; track pillar.id; let i = $index) {
+          @for (pillar of currentPillars(); track pillar.id; let i = $index) {
             <button
+              type="button"
               (click)="activeTab.set(i)"
               class="group px-6 py-3.5 rounded-2xl text-sm font-semibold transition-all duration-300 flex items-center gap-3 cursor-pointer"
               [class]="activeTab() === i
@@ -56,7 +46,7 @@ interface Pillar {
         </div>
 
         <!-- Pillar Interactive Panel -->
-        @for (pillar of pillars; track pillar.id; let i = $index) {
+        @for (pillar of currentPillars(); track pillar.id; let i = $index) {
           @if (activeTab() === i) {
             <div class="grid lg:grid-cols-12 gap-8 items-stretch animate-fadeIn">
               <!-- Left: Detailed Content Card (7 Cols) -->
@@ -72,7 +62,7 @@ interface Pillar {
                       {{ pillar.badge }}
                     </span>
                     <span class="text-xs font-mono text-gray-400">
-                      Protocolo RO-P{{ i + 1 }}
+                      PROTOCOL RO-P{{ i + 1 }}
                     </span>
                   </div>
 
@@ -81,7 +71,7 @@ interface Pillar {
                   </h3>
 
                   <p class="text-base text-gray-300 leading-relaxed mb-6">
-                    {{ pillar.fullDescription }}
+                    {{ pillar.fullDesc }}
                   </p>
 
                   <!-- Technical Specs Grid -->
@@ -100,7 +90,7 @@ interface Pillar {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-xs md:text-sm font-medium">
-                      <strong>Garantia de Acordo de Nível de Serviço (SLA):</strong> {{ pillar.actionSLA }}
+                      {{ pillar.sla }}
                     </span>
                   </div>
                 </app-glass-card>
@@ -122,36 +112,36 @@ interface Pillar {
                   </div>
 
                   <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald/10 border border-emerald/20 text-xs font-semibold text-emerald uppercase tracking-wider mb-3">
-                    Papel Estratégico Humano
+                    {{ i18n.t().regional.humanRole.tag }}
                   </div>
 
                   <h4 class="text-xl font-extrabold text-white mb-3">
-                    Engenheiros Biológicos de Base
+                    {{ i18n.t().regional.humanRole.title }}
                   </h4>
 
                   <p class="text-sm text-gray-300 leading-relaxed mb-6">
-                    A espinha dorsal da Rede Oásis não é apenas silício, mas sim o conhecimento acumulado de viveiristas e técnicos de campo, formalmente capacitados e certificados como operadores biológicos.
+                    {{ i18n.t().regional.humanRole.desc }}
                   </p>
 
                   <div class="p-4 rounded-2xl bg-black/30 border border-emerald/20 mb-6">
-                    <p class="text-xs font-bold text-emerald uppercase tracking-wider mb-2">Atribuição neste Pilar</p>
+                    <p class="text-xs font-bold text-emerald uppercase tracking-wider mb-2">Protocolo Operacional</p>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                      {{ pillar.baseEngineersRole }}
+                      {{ pillar.role }}
                     </p>
                   </div>
 
                   <div class="space-y-3">
                     <div class="flex items-center gap-2.5 text-xs text-gray-300">
                       <div class="w-2 h-2 rounded-full bg-emerald"></div>
-                      <span>Remuneração justa e previsível via contratos SaaS</span>
+                      <span>{{ i18n.t().regional.humanRole.bullet1 }}</span>
                     </div>
                     <div class="flex items-center gap-2.5 text-xs text-gray-300">
                       <div class="w-2 h-2 rounded-full bg-emerald"></div>
-                      <span>Auditorias fitossanitárias assistidas por aplicativo</span>
+                      <span>{{ i18n.t().regional.humanRole.bullet2 }}</span>
                     </div>
                     <div class="flex items-center gap-2.5 text-xs text-gray-300">
                       <div class="w-2 h-2 rounded-full bg-emerald"></div>
-                      <span>Certificação de procedência e conservação genética</span>
+                      <span>{{ i18n.t().regional.humanRole.bullet3 }}</span>
                     </div>
                   </div>
                 </app-glass-card>
@@ -164,62 +154,15 @@ interface Pillar {
   `,
 })
 export class RegionalOasisComponent {
+  protected readonly i18n = inject(TranslationService);
   readonly activeTab = signal(0);
 
-  readonly pillars: Pillar[] = [
-    {
-      id: 'banco-estrategico',
-      title: 'Banco Estratégico',
-      badge: 'Preservação & Genética',
-      iconSvg: '',
-      shortDescription: 'Repositório vivo de matrizes botânicas georreferenciadas para cada bioma.',
-      fullDescription:
-        'O Banco Estratégico mantém matrizes botânicas nativas com alta resiliência climática, mapeadas com precisão e catalogadas segundo seus biomas de origem. Funciona como um cofre genético ativo contra crises ambientais e erosão de biodiversidade.',
-      specs: [
-        { label: 'Variabilidade Genética', value: '150+ Linhagens Mapeadas' },
-        { label: 'Rastreabilidade de Sementes', value: 'Georreferenciamento 100%' },
-        { label: 'Capacidade de Germinação', value: '> 92% em Viveiros' },
-        { label: 'Conexão em Rede', value: '5 Polos Sincronizados' },
-      ],
-      baseEngineersRole:
-        'Viveiristas realizam a coleta orientada, triagem fenotípica de sementes e manutenção das plantas-mãe nos polos regionais sob rígidos protocolos de pureza genética.',
-      actionSLA: 'Disponibilidade de germoplasma certificado em até 72 horas para qualquer polo da rede.',
-    },
-    {
-      id: 'recuperacao-nativa',
-      title: 'Recuperação Nativa',
-      badge: 'Restauração de Ecossistemas',
-      iconSvg: '',
-      shortDescription: 'Metodologias de implantação rápida para recomposição de matas ciliares e encostas.',
-      fullDescription:
-        'Metodologias consorciadas de sucessão ecológica acelerada que restauram ecossistemas degradados em frações do tempo convencional. Os módulos combinam espécies pioneiras de crescimento ultra-rápido com clímax florestal permanente.',
-      specs: [
-        { label: 'Taxa de Sobrevivência', value: '96.8% em 12 meses' },
-        { label: 'Retenção Hídrica do Solo', value: '+42% no 1º Ano' },
-        { label: 'Monitoramento IoT', value: 'Telemetria Diária' },
-        { label: 'Sucessão Ecológica', value: 'Evolução Multi-estrato' },
-      ],
-      baseEngineersRole:
-        'Os engenheiros biológicos atuam no plantio de precisão, inoculação de fungos micorrízicos benéficos e acompanhamento periódico da taxa de fixação em campo.',
-      actionSLA: 'Equipe de intervenção no local e início de plantio corretivo em até 5 dias após autorização.',
-    },
-    {
-      id: 'estoque-vivo',
-      title: 'Estoque Vivo (Plug & Play)',
-      badge: 'Disponibilidade Imediata',
-      iconSvg: '',
-      shortDescription: 'Módulos vegetais pré-enraizados prontos para instalação em obras críticas.',
-      fullDescription:
-        'Módulos de infraestrutura viva mantidos em estado de prontidão nos viveiros regionais. Em caso de desastres geológicos, rompimentos ou necessidade imediata de contenção, os módulos são transportados e instalados sem tempo de espera de germinação.',
-      specs: [
-        { label: 'Tempo de Resposta', value: 'Pronto para Envio em 48h' },
-        { label: 'Sistema Radicular', value: 'Pré-estruturado em Mantas' },
-        { label: 'Modularidade', value: 'Encaixe Plug and Play' },
-        { label: 'Fixação Geotécnica', value: 'Imediata após ancoragem' },
-      ],
-      baseEngineersRole:
-        'Gerenciam o acondicionamento dos módulos em esteiras móveis, calibram a hidratação e preparam a logística de entrega rápida em veículos climatizados ou protegidos.',
-      actionSLA: 'Expedição imediata de até 5.000m² de cobertura viva com logística expressa em 48 horas.',
-    },
-  ];
+  readonly currentPillars = computed(() => {
+    const p = this.i18n.t().regional.pillars;
+    return [
+      { id: 'banco', ...p.banco },
+      { id: 'recuperacao', ...p.recuperacao },
+      { id: 'estoque', ...p.estoque },
+    ];
+  });
 }

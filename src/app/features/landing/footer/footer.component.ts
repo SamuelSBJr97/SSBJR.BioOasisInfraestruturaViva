@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslationService } from '../../../core/services/translation.service';
 
 @Component({
   selector: 'app-footer',
@@ -26,49 +27,89 @@ import { FormsModule } from '@angular/forms';
             </div>
 
             <p class="text-sm text-gray-400 leading-relaxed max-w-sm">
-              Infraestrutura biológica descentralizada para resiliência territorial e proteção de ativos de missão crítica em escala nacional.
+              {{ i18n.t().footer.desc }}
             </p>
 
             <div class="pt-2 text-xs text-gray-500">
-              <p>Tecnologia com DNA Brasileiro 🇧🇷</p>
-              <p class="mt-1">Padrão Enterprise pronto para SaaS & IoT</p>
+              <p>{{ i18n.t().footer.dna }}</p>
+              <p class="mt-1 font-mono text-[11px] text-emerald">Padrão Enterprise // Angular 18+ & Tailwind CSS</p>
             </div>
           </div>
 
           <!-- Links Column 1: Plataforma (2 Cols) -->
           <div class="lg:col-span-2">
-            <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-4">Plataforma</h4>
+            <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-4">
+              {{ i18n.t().footer.platformTitle }}
+            </h4>
             <ul class="space-y-3">
-              <li><a href="#hero" class="text-sm text-gray-400 hover:text-emerald transition-colors">Início</a></li>
-              <li><a href="#paradigm" class="text-sm text-gray-400 hover:text-emerald transition-colors">Mudança de Paradigma</a></li>
-              <li><a href="#regional" class="text-sm text-gray-400 hover:text-emerald transition-colors">Oásis Regionais</a></li>
-              <li><a href="#traceability" class="text-sm text-gray-400 hover:text-emerald transition-colors">Rastreabilidade</a></li>
+              <li>
+                <a href="#hero" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.links.hero }}
+                </a>
+              </li>
+              <li>
+                <a href="#paradigm" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.links.paradigm }}
+                </a>
+              </li>
+              <li>
+                <a href="#regional" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.links.regional }}
+                </a>
+              </li>
+              <li>
+                <a href="#traceability" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.links.traceability }}
+                </a>
+              </li>
               <li>
                 <span class="text-sm text-gray-500 flex items-center gap-1.5 cursor-not-allowed">
-                  Telemetria Live
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald/10 text-emerald border border-emerald/20 font-bold uppercase">Breve</span>
+                  {{ i18n.t().footer.links.telemetry }}
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald/10 text-emerald border border-emerald/20 font-bold uppercase">
+                    {{ i18n.t().footer.links.soonBadge }}
+                  </span>
                 </span>
               </li>
             </ul>
           </div>
 
-          <!-- Links Column 2: Rede (2 Cols) -->
+          <!-- Links Column 2: Comunidade (2 Cols) -->
           <div class="lg:col-span-2">
-            <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-4">Comunidade</h4>
+            <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-4">
+              {{ i18n.t().footer.communityTitle }}
+            </h4>
             <ul class="space-y-3">
-              <li><a href="#regional" class="text-sm text-gray-400 hover:text-emerald transition-colors">Viveiristas Parceiros</a></li>
-              <li><a href="#paradigm" class="text-sm text-gray-400 hover:text-emerald transition-colors">Engenheiros Ambientais</a></li>
-              <li><a href="#traceability" class="text-sm text-gray-400 hover:text-emerald transition-colors">Contratos Corporativos</a></li>
-              <li><a href="#footer" class="text-sm text-gray-400 hover:text-emerald transition-colors">Manifesto Aberto</a></li>
+              <li>
+                <a href="#regional" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.communityLinks.nurseries }}
+                </a>
+              </li>
+              <li>
+                <a href="#paradigm" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.communityLinks.engineers }}
+                </a>
+              </li>
+              <li>
+                <a href="#traceability" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.communityLinks.contracts }}
+                </a>
+              </li>
+              <li>
+                <a href="#footer" class="text-sm text-gray-400 hover:text-emerald transition-colors">
+                  {{ i18n.t().footer.communityLinks.manifesto }}
+                </a>
+              </li>
             </ul>
           </div>
 
           <!-- Lead Capture (4 Cols) -->
           <div class="lg:col-span-4">
             <div class="p-6 rounded-3xl glass border border-emerald/20">
-              <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-2">Conecte-se à Rede</h4>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-2">
+                {{ i18n.t().footer.lead.title }}
+              </h4>
               <p class="text-xs text-gray-400 mb-5 leading-relaxed">
-                Cadastre-se para receber relatórios técnicos, integrar seu viveiro ou solicitar estudo preliminar de risco geotécnico.
+                {{ i18n.t().footer.lead.desc }}
               </p>
 
               @if (submitted()) {
@@ -80,8 +121,12 @@ import { FormsModule } from '@angular/forms';
                       </svg>
                     </div>
                     <div>
-                      <p class="text-xs font-bold text-emerald">Cadastro Realizado com Sucesso!</p>
-                      <p class="text-[11px] text-gray-300 mt-0.5">Nossa equipe de engenharia biológica entrará em contato.</p>
+                      <p class="text-xs font-bold text-emerald">
+                        {{ i18n.t().footer.lead.successTitle }}
+                      </p>
+                      <p class="text-[11px] text-gray-300 mt-0.5">
+                        {{ i18n.t().footer.lead.successDesc }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -93,10 +138,10 @@ import { FormsModule } from '@angular/forms';
                       name="interestType"
                       class="w-full px-4 py-2.5 rounded-xl bg-dark-bg/90 border border-white/10 text-gray-300 text-xs focus:outline-none focus:border-emerald/50 transition-colors cursor-pointer"
                     >
-                      <option value="empresa">Empresa / Infraestrutura Crítica</option>
-                      <option value="viveirista">Viveirista / Produtor de Base</option>
-                      <option value="governo">Setor Público / Defesa Civil</option>
-                      <option value="pesquisador">Pesquisador / Especialista</option>
+                      <option value="enterprise">{{ i18n.t().footer.lead.options.enterprise }}</option>
+                      <option value="nursery">{{ i18n.t().footer.lead.options.nursery }}</option>
+                      <option value="government">{{ i18n.t().footer.lead.options.government }}</option>
+                      <option value="researcher">{{ i18n.t().footer.lead.options.researcher }}</option>
                     </select>
                   </div>
                   <div>
@@ -104,7 +149,7 @@ import { FormsModule } from '@angular/forms';
                       type="email"
                       [(ngModel)]="email"
                       name="email"
-                      placeholder="seu@corporativo.com"
+                      [placeholder]="i18n.t().footer.lead.placeholder"
                       required
                       class="w-full px-4 py-2.5 rounded-xl bg-dark-bg/90 border border-white/10 text-white placeholder-gray-500 text-xs focus:outline-none focus:border-emerald/50 focus:ring-1 focus:ring-emerald/40 transition-colors"
                     />
@@ -114,7 +159,7 @@ import { FormsModule } from '@angular/forms';
                     [disabled]="!email"
                     class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-forest to-emerald-dark text-white text-xs font-bold uppercase tracking-wider hover:from-forest-dark hover:to-forest transition-all duration-300 shadow-lg shadow-forest/30 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Ingressar no Ecossistema
+                    {{ i18n.t().footer.lead.button }}
                   </button>
                 </form>
               }
@@ -124,11 +169,17 @@ import { FormsModule } from '@angular/forms';
 
         <!-- Sub-footer Bottom Bar -->
         <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© 2026 Rede Oásis. Infraestrutura Biológica Descentralizada. Todos os direitos reservados.</p>
+          <p>{{ i18n.t().footer.rights }}</p>
           <div class="flex items-center gap-6">
-            <a href="#hero" class="hover:text-emerald transition-colors">Termos de Governança</a>
-            <a href="#hero" class="hover:text-emerald transition-colors">Política de Dados & Telemetria</a>
-            <a href="#hero" class="hover:text-emerald transition-colors">Segurança</a>
+            <a href="#hero" class="hover:text-emerald transition-colors">
+              {{ i18n.t().footer.bottomLinks.governance }}
+            </a>
+            <a href="#hero" class="hover:text-emerald transition-colors">
+              {{ i18n.t().footer.bottomLinks.data }}
+            </a>
+            <a href="#hero" class="hover:text-emerald transition-colors">
+              {{ i18n.t().footer.bottomLinks.security }}
+            </a>
           </div>
         </div>
       </div>
@@ -136,15 +187,17 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class FooterComponent {
+  protected readonly i18n = inject(TranslationService);
   email = '';
-  interestType = 'empresa';
+  interestType = 'enterprise';
   readonly submitted = signal(false);
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.email) {
-      console.log('Lead Capturado na Rede Oásis:', {
+      console.log('Lead Captured in Rede Oasis:', {
         email: this.email,
-        interesse: this.interestType,
+        interest: this.interestType,
+        lang: this.i18n.currentLang(),
         timestamp: new Date().toISOString(),
       });
       this.submitted.set(true);

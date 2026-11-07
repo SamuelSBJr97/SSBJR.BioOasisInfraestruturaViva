@@ -24,9 +24,13 @@ export interface TraceableAsset {
   qrCodeId: string;
   speciesScientificName: string;
   speciesCommonName: string;
+  applicationType: string;
   batchNumber: string;
   poleOrigin: string;
   healthIndex: number;
+  rootTensileStrengthMPa: number;
+  soilMoisturePercentage: number;
+  co2AbsorptionAnnualKg: number;
   verifiedAt: string;
 }
 
@@ -37,4 +41,13 @@ export interface SaaSContract {
   monthlyPreBilledValue: number;
   slaUptimePercentage: number;
   telemetryActive: boolean;
+}
+
+export interface RoiSimulationResult {
+  estimatedCostOasis: number;
+  estimatedCostTraditionalConcrete: number;
+  financialSavings: number;
+  savingsPercentage: number;
+  co2OffsetTonsAnnual: number;
+  nurseriesSupported: number;
 }

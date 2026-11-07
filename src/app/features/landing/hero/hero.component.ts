@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { OasisNetworkService } from '../../../core/services/oasis-network.service';
+import { TranslationService } from '../../../core/services/translation.service';
 import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-button.component';
 
 @Component({
@@ -15,38 +16,39 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
         <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald/20 to-transparent"></div>
       </div>
 
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 w-full">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 w-full">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <!-- Left: Text Content -->
           <div class="space-y-8 z-10">
             <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald/10 border border-emerald/20 shadow-sm shadow-emerald/5 backdrop-blur-md">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald animate-pulse"></span>
-              <span class="text-xs font-semibold text-emerald tracking-wider uppercase">Infraestrutura Biológica Descentralizada</span>
+              <span class="text-xs font-semibold text-emerald tracking-wider uppercase">
+                {{ i18n.t().hero.badge }}
+              </span>
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight">
-              <span class="text-white">Rede Oásis —</span>
+              <span class="text-white">{{ i18n.t().hero.titleMain }}</span>
               <br />
               <span class="bg-gradient-to-r from-forest via-emerald to-emerald-light bg-clip-text text-transparent">
-                Infraestrutura Biológica
+                {{ i18n.t().hero.titleGradient }}
               </span>
               <br />
-              <span class="text-white">Descentralizada</span>
+              <span class="text-white">{{ i18n.t().hero.titleSuffix }}</span>
             </h1>
 
             <p class="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
-              Investimento verde vivo em rede regional para infraestruturas de
-              <span class="text-emerald font-semibold">missão crítica</span>.
+              {{ i18n.t().hero.subtitle }}
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 pt-2">
               <app-cta-button
-                label="Conhecer a Rede"
+                [label]="i18n.t().hero.ctaPrimary"
                 variant="primary"
                 href="#paradigm"
               />
               <app-cta-button
-                label="Ver Polos Regionais"
+                [label]="i18n.t().hero.ctaSecondary"
                 variant="secondary"
                 href="#regional"
                 [showIcon]="false"
@@ -59,19 +61,25 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                 <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
                   {{ oasisService.totalPoles() }}
                 </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">Polos Regionais</p>
+                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
+                  {{ i18n.t().hero.stats.poles }}
+                </p>
               </div>
               <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
                 <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
                   {{ oasisService.totalCatalogedSpecies() }}+
                 </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">Espécies Nativas</p>
+                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
+                  {{ i18n.t().hero.stats.species }}
+                </p>
               </div>
               <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
                 <p class="text-3xl md:text-4xl font-extrabold text-emerald tracking-tight">
                   {{ oasisService.totalNurseries() }}
                 </p>
-                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">Viveiros Parceiros</p>
+                <p class="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wide">
+                  {{ i18n.t().hero.stats.nurseries }}
+                </p>
               </div>
             </div>
           </div>
@@ -140,7 +148,9 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   <circle cx="200" cy="100" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0s"/>
                   <circle cx="200" cy="100" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="200" cy="100" r="3" fill="#ffffff"/>
-                  <text x="200" y="80" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">Polo Norte</text>
+                  <text x="200" y="80" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                    {{ i18n.t().hero.mapPoles.norte }}
+                  </text>
                 </g>
 
                 <!-- 2. Polo Nordeste (Recife) -->
@@ -148,7 +158,9 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   <circle cx="380" cy="160" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0.4s"/>
                   <circle cx="380" cy="160" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="380" cy="160" r="3" fill="#ffffff"/>
-                  <text x="380" y="140" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">Polo Nordeste</text>
+                  <text x="380" y="140" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                    {{ i18n.t().hero.mapPoles.nordeste }}
+                  </text>
                 </g>
 
                 <!-- 3. Polo Centro-Oeste (Brasília) -->
@@ -156,7 +168,9 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   <circle cx="290" cy="250" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 0.8s"/>
                   <circle cx="290" cy="250" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="290" cy="250" r="3" fill="#ffffff"/>
-                  <text x="290" y="230" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">Polo Centro-Oeste</text>
+                  <text x="290" y="230" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                    {{ i18n.t().hero.mapPoles.centroOeste }}
+                  </text>
                 </g>
 
                 <!-- 4. Polo Sudeste (São Paulo / Vale) -->
@@ -164,7 +178,9 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   <circle cx="330" cy="340" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 1.2s"/>
                   <circle cx="330" cy="340" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="330" cy="340" r="3" fill="#ffffff"/>
-                  <text x="330" y="320" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">Polo Sudeste</text>
+                  <text x="330" y="320" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                    {{ i18n.t().hero.mapPoles.sudeste }}
+                  </text>
                 </g>
 
                 <!-- 5. Polo Sul (Curitiba) -->
@@ -172,7 +188,9 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                   <circle cx="290" cy="400" r="14" fill="#50C878" opacity="0.15" class="animate-pulse-marker" style="animation-delay: 1.6s"/>
                   <circle cx="290" cy="400" r="7" fill="#228B22" stroke="#7DDFAA" stroke-width="2" filter="url(#glow)"/>
                   <circle cx="290" cy="400" r="3" fill="#ffffff"/>
-                  <text x="290" y="425" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">Polo Sul</text>
+                  <text x="290" y="425" text-anchor="middle" fill="#7DDFAA" font-size="11" font-weight="600" font-family="Inter, sans-serif">
+                    {{ i18n.t().hero.mapPoles.sul }}
+                  </text>
                 </g>
               </svg>
 
@@ -185,13 +203,13 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
                       {{ pole.name }}
                     </span>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald/10 text-emerald-light border border-emerald/20 font-semibold uppercase">
-                      {{ pole.status }}
+                      {{ i18n.t().hero.poleStatus }}
                     </span>
                   </div>
                   <p class="text-xs text-gray-300 mb-2 font-medium">{{ pole.location }}</p>
                   <div class="flex items-center gap-4 text-[11px] text-gray-400">
-                    <span>🌱 <strong class="text-white">{{ pole.speciesCount }}</strong> Espécies</span>
-                    <span>🏡 <strong class="text-white">{{ pole.nurseryPartners }}</strong> Viveiros</span>
+                    <span>🌱 <strong class="text-white">{{ pole.speciesCount }}</strong> {{ i18n.t().hero.speciesLabel }}</span>
+                    <span>🏡 <strong class="text-white">{{ pole.nurseryPartners }}</strong> {{ i18n.t().hero.nurseriesLabel }}</span>
                     <span>📍 {{ pole.primaryBiomes.join(', ') }}</span>
                   </div>
                 </div>
@@ -208,9 +226,13 @@ import { CtaButtonComponent } from '../../../shared/components/cta-button/cta-bu
 })
 export class HeroComponent {
   protected readonly oasisService = inject(OasisNetworkService);
+  protected readonly i18n = inject(TranslationService);
   readonly selectedPoleId = signal<string>('pole-sudeste');
 
   currentPole() {
-    return this.oasisService.poles().find((p) => p.id === this.selectedPoleId()) ?? this.oasisService.poles()[0];
+    return (
+      this.oasisService.poles().find((p) => p.id === this.selectedPoleId()) ??
+      this.oasisService.poles()[0]
+    );
   }
 }

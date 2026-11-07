@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SectionHeadingComponent } from '../../../shared/components/section-heading/section-heading.component';
 import { OasisNetworkService } from '../../../core/services/oasis-network.service';
+import { TranslationService } from '../../../core/services/translation.service';
 
 @Component({
   selector: 'app-traceability',
@@ -16,10 +17,10 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <!-- Section Heading via Shared Component -->
         <app-section-heading
-          tag="Rastreabilidade & Governança"
-          title="Cada Planta,"
-          highlight="Um Ativo Rastreável"
-          subtitle="Garantia de procedência com telemetria biométrica, certificação de origem e governança corporativa no modelo SaaS."
+          [tag]="i18n.t().traceability.tag"
+          [title]="i18n.t().traceability.title"
+          [highlight]="i18n.t().traceability.highlight"
+          [subtitle]="i18n.t().traceability.subtitle"
         />
 
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -50,7 +51,9 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
                   <div class="text-center mb-5">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald/10 border border-emerald/20">
                       <span class="w-2 h-2 rounded-full bg-emerald animate-ping"></span>
-                      <span class="text-[10px] font-bold text-emerald uppercase tracking-wider">Leitor Bio-Rastreio Ativo</span>
+                      <span class="text-[10px] font-bold text-emerald uppercase tracking-wider">
+                        {{ i18n.t().traceability.scanner.liveBadge }}
+                      </span>
                     </div>
                   </div>
 
@@ -70,38 +73,60 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
                     </div>
                   </div>
 
-                  <!-- RFID / NFC Pill Indicator -->
-                  <div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-emerald/20 mb-4">
+                  <!-- RFID / NFC Indicator -->
+                  <div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-emerald/20 mb-3">
                     <div class="flex items-center gap-2">
                       <div class="w-6 h-6 rounded-lg bg-emerald/20 flex items-center justify-center text-emerald">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                       </div>
-                      <span class="text-xs font-semibold text-white">Chip RFID / NFC</span>
+                      <span class="text-xs font-semibold text-white">
+                        {{ i18n.t().traceability.scanner.chipBadge }}
+                      </span>
                     </div>
                     <span class="text-[10px] font-mono text-emerald bg-emerald/10 px-2 py-0.5 rounded border border-emerald/20">
                       {{ oasisService.activeAsset().rfidTag }}
                     </span>
                   </div>
 
+                  <!-- Cycle Button -->
+                  <button
+                    type="button"
+                    (click)="oasisService.cycleNextAsset()"
+                    class="w-full mb-4 py-2 px-3 rounded-xl bg-emerald/10 hover:bg-emerald/20 text-emerald border border-emerald/30 text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span>{{ i18n.t().traceability.scanner.cycleButton }}</span>
+                  </button>
+
                   <!-- Scanned Telemetry Output Data -->
                   <div class="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2 text-xs">
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
-                      <span class="text-gray-400">Espécie:</span>
-                      <span class="text-white font-medium italic">{{ oasisService.activeAsset().speciesScientificName }}</span>
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.species }}:</span>
+                      <span class="text-white font-medium italic text-right max-w-[170px] truncate">
+                        {{ oasisService.activeAsset().speciesScientificName }}
+                      </span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
-                      <span class="text-gray-400">Lote Certificado:</span>
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.batch }}:</span>
                       <span class="text-emerald font-mono font-bold">{{ oasisService.activeAsset().batchNumber }}</span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-white/5">
-                      <span class="text-gray-400">Origem:</span>
-                      <span class="text-gray-300">{{ oasisService.activeAsset().poleOrigin }}</span>
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.origin }}:</span>
+                      <span class="text-gray-300 text-right max-w-[170px] truncate">
+                        {{ oasisService.activeAsset().poleOrigin }}
+                      </span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.vitality }}:</span>
+                      <span class="text-emerald font-bold">{{ oasisService.activeAsset().healthIndex }}%</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span class="text-gray-400">Índice Vitalidade:</span>
-                      <span class="text-emerald font-bold">{{ oasisService.activeAsset().healthIndex }}% (Excelente)</span>
+                      <span class="text-gray-400">{{ i18n.t().traceability.scanner.fields.rootStrength }}:</span>
+                      <span class="text-emerald-light font-mono font-semibold">{{ oasisService.activeAsset().rootTensileStrengthMPa }} MPa</span>
                     </div>
                   </div>
                 </div>
@@ -113,13 +138,16 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
           <div class="lg:col-span-7 space-y-8">
             <div>
               <span class="px-3.5 py-1 rounded-full bg-emerald/10 border border-emerald/20 text-xs font-bold text-emerald uppercase tracking-wider">
-                Modelo Econômico
+                {{ i18n.t().traceability.saas.badge }}
               </span>
               <h3 class="text-3xl lg:text-4xl font-extrabold text-white mt-4 mb-4 tracking-tight">
-                SaaS — <span class="bg-gradient-to-r from-emerald via-emerald-light to-white bg-clip-text text-transparent">Sustainability as a Service</span>
+                {{ i18n.t().traceability.saas.title }}
+                <span class="bg-gradient-to-r from-emerald via-emerald-light to-white bg-clip-text text-transparent">
+                  {{ i18n.t().traceability.saas.highlight }}
+                </span>
               </h3>
               <p class="text-gray-300 text-base leading-relaxed">
-                Superamos o modelo arcaico de aquisição pontual de plantas. Na Rede Oásis, a infraestrutura verde é contratada como um serviço contínuo de engenharia, com faturamento recorrente, auditorias digitais e SLA garantido.
+                {{ i18n.t().traceability.saas.desc }}
               </p>
             </div>
 
@@ -134,9 +162,11 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-lg font-bold text-white mb-1">Contratos Pré-Faturados com Previsibilidade</h4>
+                    <h4 class="text-lg font-bold text-white mb-1">
+                      {{ i18n.t().traceability.saas.bullet1Title }}
+                    </h4>
                     <p class="text-sm text-gray-300 leading-relaxed">
-                      Concessionárias, mineradoras e municípios contratam capacidade biológica reservada mensalmente. O viveirista recebe remuneração antecipada estável e o cliente tem garantia ininterrupta de estoque e manutenção.
+                      {{ i18n.t().traceability.saas.bullet1Desc }}
                     </p>
                   </div>
                 </div>
@@ -151,9 +181,11 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-lg font-bold text-white mb-1">Certificação Digital & Rastreabilidade de Origem</h4>
+                    <h4 class="text-lg font-bold text-white mb-1">
+                      {{ i18n.t().traceability.saas.bullet2Title }}
+                    </h4>
                     <p class="text-sm text-gray-300 leading-relaxed">
-                      Cada módulo vegetal possui identidade criptográfica única vinculada a tags RFID/QR, registrando matriz parental, viveiro de origem, histórico fitossanitário e coordenadas de plantio em livro-razão imutável.
+                      {{ i18n.t().traceability.saas.bullet2Desc }}
                     </p>
                   </div>
                 </div>
@@ -168,9 +200,11 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-lg font-bold text-white mb-1">Telemetria de Campo e Relatórios ESG para Auditoria</h4>
+                    <h4 class="text-lg font-bold text-white mb-1">
+                      {{ i18n.t().traceability.saas.bullet3Title }}
+                    </h4>
                     <p class="text-sm text-gray-300 leading-relaxed">
-                      Painel com métricas automatizadas de fixação de carbono, estabilização de encostas e retenção hídrica, pronto para auditorias de conformidade com padrões GRI, SASB e taxonomias verdes internacionais.
+                      {{ i18n.t().traceability.saas.bullet3Desc }}
                     </p>
                   </div>
                 </div>
@@ -184,6 +218,7 @@ import { OasisNetworkService } from '../../../core/services/oasis-network.servic
 })
 export class TraceabilityComponent {
   protected readonly oasisService = inject(OasisNetworkService);
+  protected readonly i18n = inject(TranslationService);
 
   readonly qrMatrix: boolean[] = [
     true, true, true, true, true, true, true,
